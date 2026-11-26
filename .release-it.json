@@ -1,0 +1,24 @@
+{
+  "git": {
+    "push": false,
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}"
+  },
+  "npm": {
+    "publish": false
+  },
+  "github": {
+    "release": false
+  },
+  "hooks": {
+    "after:bump": "node scripts/sync-version.mjs && node scripts/build.mjs && git add tokens.json tokens.css DESIGN.md components docs integrations skills"
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits"
+      },
+      "infile": "CHANGELOG.md"
+    }
+  }
+}
