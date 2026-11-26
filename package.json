@@ -1,0 +1,65 @@
+{
+  "name": "@uni-helper/design",
+  "version": "0.0.0",
+  "description": "The uni-helper design system: tokens, components, and Agent Skill.",
+  "keywords": [
+    "css",
+    "design-system",
+    "design-tokens",
+    "nuxt-ui",
+    "tailwind",
+    "uni-helper"
+  ],
+  "homepage": "https://github.com/uni-helper/design",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uni-helper/design.git"
+  },
+  "files": [
+    "tokens.css",
+    "tokens.json",
+    "tokens.schema.json",
+    "components",
+    "integrations",
+    "assets",
+    "fonts",
+    "docs",
+    "DESIGN.md",
+    "README.md",
+    "README.zh.md",
+    "LICENSE",
+    "skills/uni-helper-design",
+    "CHANGELOG.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./tokens.css",
+    "./tokens.css": "./tokens.css",
+    "./tokens.json": "./tokens.json",
+    "./components.css": "./components/components.css",
+    "./components.js": "./components/components.js",
+    "./tailwind.css": "./integrations/tailwind.css",
+    "./nuxt-ui.css": "./integrations/nuxt-ui.css"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "vp check",
+    "fix": "vp check --fix",
+    "test": "vp test",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^12.0.2",
+    "@types/node": "^24.19.3",
+    "release-it": "^21.1.3",
+    "vite-plus": "^1.8.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@12.23.0"
+}
