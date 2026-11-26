@@ -1,57 +1,12 @@
-/* uni-helper — generated from tokens.json */
-:root, [data-theme="light"] {
-  --background: #ffffff; /* Page background. */
-  --foreground: #09090b; /* Body text on background. */
-  --card: #ffffff; /* Card surface. */
-  --card-foreground: #09090b; /* Text and icons on card. */
-  --popover: #ffffff; /* Menus and floating panels. */
-  --popover-foreground: #09090b; /* Text on popover. */
-  --primary: #18181b; /* Primary action fill. Zinc ink, not the brand green. */
-  --primary-foreground: #fafafa; /* Text and icons on primary. 16.97:1. */
-  --secondary: #f4f4f5; /* Secondary button and quiet fill. */
-  --secondary-foreground: #18181b; /* Text on secondary. */
-  --muted: #f4f4f5; /* Muted surface, code blocks and hover state. */
-  --muted-foreground: #71717a; /* Secondary text. 4.83:1 on light, 7.76:1 on dark. */
-  --accent: #f4f4f5; /* Hover and selected surface. */
-  --accent-foreground: #18181b; /* Text on accent. */
-  --destructive: #dc2626; /* Destructive action fill. White text reaches 4.63:1. */
-  --destructive-foreground: #fafafa; /* Text on destructive. */
-  --border: #e4e4e7; /* Default 1px border. */
-  --input: #e4e4e7; /* Form control border. Same value as border. */
-  --ring: #18181b; /* Keyboard focus ring. */
-  --brand: #2b9939; /* uni-helper mark green. Marks, accents, borders and large text; white on it is 3.67:1, so not body text. */
-  --brand-soft: #a9d6b0; /* Pale brand green. Tints and diagram fills. */
-  --brand-mint: #8acb9b; /* Light brand green. Secondary marks and diagram strokes. */
-  --brand-deep: #1c6325; /* Deep brand green. Grounds and pressed states. */
-  --info: oklch(62.3% 0.214 259.815); /* Info accent. Border and icon only; text stays foreground. */
-  --success: oklch(72.3% 0.219 149.579); /* Success accent. Border and icon only. */
-  --warning: oklch(79.5% 0.184 86.047); /* Warning accent. Border and icon only. */
-  --error: oklch(63.7% 0.237 25.331); /* Error accent. Border and icon only. */
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* Controls and small cards. */
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* Raised cards. */
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* Dialogs and popovers. */
-}
-[data-theme="dark"] {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --card: #09090b;
-  --card-foreground: #fafafa;
-  --popover: #09090b;
-  --popover-foreground: #fafafa;
-  --primary: #fafafa;
-  --primary-foreground: #18181b;
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --accent: #27272a;
-  --accent-foreground: #fafafa;
-  --destructive: #7f1d1d;
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #d4d4d8;
-}
+/* uni-helper design tokens. Generated from tokens.json; do not edit by hand. */
+@font-face { font-family: "Geist"; src: url("fonts/Geist.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("fonts/GeistMono.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
 :root {
+  --brand: #2b9939; /* uni-helper mark green. Marks, diagrams, borders and large text only; white on it is 3.67:1. */
+  --brand-deep: #1c6325; /* Deep brand green. Accessible brand text and grounds. */
+  --brand-mint: #8acb9b; /* Light brand green. Secondary marks and diagram strokes. */
+  --brand-soft: #a9d6b0; /* Pale brand green. Tints and diagram fills. */
   --space-0-5: 2px; /* Hairline gaps. */
   --space-1: 4px; /* Icon-to-text gap. */
   --space-1-5: 6px; /* Tight stacking. */
@@ -66,101 +21,419 @@
   --space-16: 64px; /* Page band. */
   --space-20: 80px; /* Hero band. */
   --space-24: 96px; /* Hero band. */
-  --radius-sm: 4px; /* Small controls and badges. */
+  --radius-sm: 4px; /* Badges and key caps. */
   --radius-md: 6px; /* Buttons, inputs and menu items. */
-  --radius-lg: 8px; /* Cards, popovers and code blocks. */
-  --radius-xl: 12px; /* Media cards. */
+  --radius-lg: 8px; /* Cards, popovers and alerts. */
+  --radius-xl: 12px; /* Media cards, dialogs and large containers. */
   --radius-full: 9999px; /* Pills, avatars and dots. */
-  --font-sans: 'Geist', 'Noto Sans SC', 'Noto Sans CJK SC', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-  --text-display: 800 36px/1.1 var(--font-sans); /* Document h1. */
-  --text-heading-1: 600 30px/1.2 var(--font-sans); /* Document h2. */
+  --border-width: 1px; /* Default hairline. */
+  --border-width-strong: 2px; /* Selected and active indicators. */
+  --focus-width: 2px; /* Keyboard focus outline. */
+  --focus-offset: 2px; /* Space between control and focus outline. */
+  --container-narrow: 720px; /* Prose and form width. */
+  --container-page: 1120px; /* Default page container. */
+  --container-wide: 1440px; /* Wide application shell. */
+  --card-min: 260px; /* Minimum card width in an auto-fit grid. */
+  --measure: 72ch; /* Comfortable reading measure. */
+  --header-height: 56px; /* Application header. */
+  --z-sticky: 10; /* Sticky header. */
+  --z-overlay: 40; /* Dropdowns and popovers. */
+  --z-modal: 50; /* Dialogs. */
+  --z-toast: 60; /* Toast region. */
+  --bp-sm: 640px; /* Small tablet. */
+  --bp-md: 768px; /* Tablet. */
+  --bp-lg: 1024px; /* Desktop. */
+  --bp-xl: 1280px; /* Wide desktop. */
+  --control-height-sm: 32px; /* Compact controls. */
+  --control-height-md: 36px; /* Default controls. */
+  --control-height-lg: 40px; /* Prominent controls. */
+  --control-height-touch: 44px; /* Coarse pointer touch target. */
+  --icon-sm: 16px; /* Inline icons. */
+  --icon-md: 20px; /* Control icons. */
+  --icon-lg: 24px; /* Navigation and status icons. */
+  --opacity-disabled: 0.5; /* Disabled controls. */
+  --duration-fast: 150ms; /* Hover, focus and color changes. */
+  --duration-base: 200ms; /* Standard transitions. */
+  --duration-slow: 300ms; /* Brand expand and larger transitions. */
+  --duration-spin: 700ms; /* Spinner rotation. */
+  --duration-pulse: 1600ms; /* Skeleton pulse. */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* Default state change. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* Entering elements. */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* Exiting elements. */
+  --font-sans: 'Geist', 'Noto Sans SC', 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; /* Geist with CJK fallbacks. */
+  --font-mono: 'Geist Mono', 'Noto Sans Mono CJK SC', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; /* Geist Mono with CJK fallbacks. */
+  --type-display-size: clamp(2rem, 3.5vw, 2.25rem); /* Document h1. */
+  --type-display-line: 1.1;
+  --type-display-weight: 800;
+  --type-display-tracking: -0.025em;
+  --text-display: 800 clamp(2rem, 3.5vw, 2.25rem)/1.1 var(--font-sans); /* Document h1. */
+  --type-heading-1-size: clamp(1.75rem, 2.8vw, 1.875rem); /* Document h2. */
+  --type-heading-1-line: 1.2;
+  --type-heading-1-weight: 600;
+  --type-heading-1-tracking: -0.025em;
+  --text-heading-1: 600 clamp(1.75rem, 2.8vw, 1.875rem)/1.2 var(--font-sans); /* Document h2. */
+  --type-heading-2-size: 24px; /* Document h3 and card title. */
+  --type-heading-2-line: 1.3;
+  --type-heading-2-weight: 600;
+  --type-heading-2-tracking: -0.02em;
   --text-heading-2: 600 24px/1.3 var(--font-sans); /* Document h3 and card title. */
+  --type-heading-3-size: 20px; /* Document h4. */
+  --type-heading-3-line: 1.4;
+  --type-heading-3-weight: 600;
+  --type-heading-3-tracking: 0em;
   --text-heading-3: 600 20px/1.4 var(--font-sans); /* Document h4. */
+  --type-heading-4-size: 18px; /* Document h5. */
+  --type-heading-4-line: 1.4;
+  --type-heading-4-weight: 600;
+  --type-heading-4-tracking: 0em;
   --text-heading-4: 600 18px/1.4 var(--font-sans); /* Document h5. */
-  --text-body: 400 16px/1.75 var(--font-sans); /* Document body. */
+  --type-body-size: 16px; /* Long-form text. */
+  --type-body-line: 1.75;
+  --type-body-weight: 400;
+  --type-body-tracking: 0em;
+  --text-body: 400 16px/1.75 var(--font-sans); /* Long-form text. */
+  --type-small-size: 14px; /* Secondary copy, tables and captions. */
+  --type-small-line: 20px;
+  --type-small-weight: 400;
+  --type-small-tracking: 0em;
   --text-small: 400 14px/20px var(--font-sans); /* Secondary copy, tables and captions. */
-  --text-nav: 600 14px/20px var(--font-sans); /* Navigation and labels. */
+  --type-nav-size: 14px; /* Navigation, button labels and control labels. */
+  --type-nav-line: 20px;
+  --type-nav-weight: 600;
+  --type-nav-tracking: 0em;
+  --text-nav: 600 14px/20px var(--font-sans); /* Navigation, button labels and control labels. */
+  --type-label-size: 12px; /* Badges and compact labels. */
+  --type-label-line: 16px;
+  --type-label-weight: 600;
+  --type-label-tracking: 0em;
   --text-label: 600 12px/16px var(--font-sans); /* Badges and compact labels. */
-  --text-code: 400 14px/1.25rem var(--font-mono); /* Inline code and code blocks. */
+  --type-field-label-size: 14px; /* Form field labels. */
+  --type-field-label-line: 20px;
+  --type-field-label-weight: 500;
+  --type-field-label-tracking: 0em;
+  --text-field-label: 500 14px/20px var(--font-sans); /* Form field labels. */
+  --type-code-size: 14px; /* Inline code and code blocks. */
+  --type-code-line: 20px;
+  --type-code-weight: 400;
+  --type-code-tracking: 0em;
+  --text-code: 400 14px/20px var(--font-mono); /* Inline code and code blocks. */
+  --type-kbd-size: 10px; /* Key caps. */
+  --type-kbd-line: 1;
+  --type-kbd-weight: 500;
+  --type-kbd-tracking: 0em;
   --text-kbd: 500 10px/1 var(--font-mono); /* Key caps. */
 }
-.display {
-  font-family: var(--font-sans);
-  font-size: 36px;
-  line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --background: #ffffff; /* Page background. */
+  --foreground: #09090b; /* Body text on background. */
+  --card: #ffffff; /* Card and raised panel surface. */
+  --card-foreground: #09090b; /* Text and icons on card. */
+  --card-hover: #f8f8f9; /* Hover surface for interactive cards. Keeps muted text readable. */
+  --popover: #ffffff; /* Menus and floating panels. */
+  --popover-foreground: #09090b; /* Text on popover. */
+  --primary: #18181b; /* Primary action fill. Zinc ink, not brand green. */
+  --primary-foreground: #fafafa; /* Text and icons on primary. */
+  --primary-hover: #27272a; /* Primary action hover. */
+  --secondary: #f4f4f5; /* Secondary button and quiet fill. */
+  --secondary-foreground: #18181b; /* Text on secondary. */
+  --secondary-hover: #e9e9eb; /* Secondary button hover. */
+  --muted: #f4f4f5; /* Muted surface, code blocks and hover state. */
+  --muted-foreground: #6b6b74; /* Secondary text. Passes 4.5:1 on background and muted in both themes. */
+  --accent: #f4f4f5; /* Selected and hovered surface. */
+  --accent-foreground: #18181b; /* Text on accent. */
+  --accent-hover: #e9e9eb; /* Accent surface hover. */
+  --destructive: #dc2626; /* Destructive action fill. */
+  --destructive-foreground: #fafafa; /* Text on destructive. */
+  --destructive-hover: #b91c1c; /* Destructive action hover. */
+  --border: #e4e4e7; /* Decorative 1px separators. */
+  --border-strong: #8f8f99; /* Interactive boundaries and outlined controls. 3:1 on background. */
+  --input: #8f8f99; /* Form control border. 3:1 on background. */
+  --ring: #18181b; /* Keyboard focus ring. */
+  --link: #1c6325; /* Inline link text. Accessible brand green. */
+  --link-hover: #144f1c; /* Inline link hover. */
+  --brand-text: #1c6325; /* Accessible brand-colored text. */
+  --brand-cta: #1c6325; /* Opt-in brand CTA fill. Not the default primary action. */
+  --brand-cta-foreground: #ffffff; /* Text on the brand CTA. */
+  --info: #2563eb; /* Info status. Icon and border; message text stays foreground. */
+  --success: #15803d; /* Success status. Icon and border; message text stays foreground. */
+  --warning: #a16207; /* Warning status. Icon and border; message text stays foreground. */
+  --error: #dc2626; /* Error status. Icon and border; message text stays foreground. */
+  --chart-1: #2b9939; /* Chart series 1. */
+  --chart-2: #2563eb; /* Chart series 2. */
+  --chart-3: #b45309; /* Chart series 3. */
+  --chart-4: #dc2626; /* Chart series 4. */
+  --chart-5: #0f766e; /* Chart series 5. */
+  --chart-6: #6d28d9; /* Chart series 6. */
+  --code-bg: #f4f4f5; /* Code block surface. */
+  --code-fg: #18181b; /* Code block text. */
+  --code-muted: #6b6b74; /* Code comments and line numbers. */
+  --code-keyword: #9d174d; /* Code keyword. */
+  --code-string: #15803d; /* Code string. */
+  --code-number: #b45309; /* Code number. */
+  --code-function: #1d4ed8; /* Code function. */
+  --code-variable: #18181b; /* Code variable. */
+  --code-punctuation: #52525b; /* Code punctuation. */
+  --overlay: rgb(9 9 11 / 0.48); /* Dialog backdrop. */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* Controls and small cards. */
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* Raised cards. */
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* Dialogs and popovers. */
 }
-.heading-1 {
-  font-family: var(--font-sans);
-  font-size: 30px;
+
+[data-theme="dark"],
+.dark:not([data-theme="light"]) {
+  color-scheme: dark;
+  --background: #09090b; /* Page background. */
+  --foreground: #fafafa; /* Body text on background. */
+  --card: #141416; /* Card and raised panel surface. */
+  --card-foreground: #fafafa; /* Text and icons on card. */
+  --card-hover: #18181b; /* Hover surface for interactive cards. Keeps muted text readable. */
+  --popover: #18181b; /* Menus and floating panels. */
+  --popover-foreground: #fafafa; /* Text on popover. */
+  --primary: #fafafa; /* Primary action fill. Zinc ink, not brand green. */
+  --primary-foreground: #18181b; /* Text and icons on primary. */
+  --primary-hover: #e4e4e7; /* Primary action hover. */
+  --secondary: #27272a; /* Secondary button and quiet fill. */
+  --secondary-foreground: #fafafa; /* Text on secondary. */
+  --secondary-hover: #3f3f46; /* Secondary button hover. */
+  --muted: #27272a; /* Muted surface, code blocks and hover state. */
+  --muted-foreground: #a1a1aa; /* Secondary text. Passes 4.5:1 on background and muted in both themes. */
+  --accent: #27272a; /* Selected and hovered surface. */
+  --accent-foreground: #fafafa; /* Text on accent. */
+  --accent-hover: #3f3f46; /* Accent surface hover. */
+  --destructive: #991b1b; /* Destructive action fill. */
+  --destructive-foreground: #fafafa; /* Text on destructive. */
+  --destructive-hover: #b91c1c; /* Destructive action hover. */
+  --border: #3f3f46; /* Decorative 1px separators. */
+  --border-strong: #63636e; /* Interactive boundaries and outlined controls. 3:1 on background. */
+  --input: #63636e; /* Form control border. 3:1 on background. */
+  --ring: #d4d4d8; /* Keyboard focus ring. */
+  --link: #8acb9b; /* Inline link text. Accessible brand green. */
+  --link-hover: #a9d6b0; /* Inline link hover. */
+  --brand-text: #8acb9b; /* Accessible brand-colored text. */
+  --brand-cta: #8acb9b; /* Opt-in brand CTA fill. Not the default primary action. */
+  --brand-cta-foreground: #09090b; /* Text on the brand CTA. */
+  --info: #60a5fa; /* Info status. Icon and border; message text stays foreground. */
+  --success: #4ade80; /* Success status. Icon and border; message text stays foreground. */
+  --warning: #facc15; /* Warning status. Icon and border; message text stays foreground. */
+  --error: #f87171; /* Error status. Icon and border; message text stays foreground. */
+  --chart-1: #4ade80; /* Chart series 1. */
+  --chart-2: #60a5fa; /* Chart series 2. */
+  --chart-3: #fbbf24; /* Chart series 3. */
+  --chart-4: #f87171; /* Chart series 4. */
+  --chart-5: #2dd4bf; /* Chart series 5. */
+  --chart-6: #a78bfa; /* Chart series 6. */
+  --code-bg: #141416; /* Code block surface. */
+  --code-fg: #fafafa; /* Code block text. */
+  --code-muted: #a1a1aa; /* Code comments and line numbers. */
+  --code-keyword: #f0abfc; /* Code keyword. */
+  --code-string: #86efac; /* Code string. */
+  --code-number: #fbbf24; /* Code number. */
+  --code-function: #93c5fd; /* Code function. */
+  --code-variable: #fafafa; /* Code variable. */
+  --code-punctuation: #a1a1aa; /* Code punctuation. */
+  --overlay: rgb(0 0 0 / 0.64); /* Dialog backdrop. */
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.6), 0 1px 2px -1px rgb(0 0 0 / 0.5); /* Controls and small cards. */
+  --shadow: 0 8px 24px -8px rgb(0 0 0 / 0.7); /* Raised cards. */
+  --shadow-lg: 0 16px 48px -12px rgb(0 0 0 / 0.8); /* Dialogs and popovers. */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]):not(.dark) {
+    color-scheme: dark;
+    --background: #09090b; /* Page background. */
+    --foreground: #fafafa; /* Body text on background. */
+    --card: #141416; /* Card and raised panel surface. */
+    --card-foreground: #fafafa; /* Text and icons on card. */
+    --card-hover: #18181b; /* Hover surface for interactive cards. Keeps muted text readable. */
+    --popover: #18181b; /* Menus and floating panels. */
+    --popover-foreground: #fafafa; /* Text on popover. */
+    --primary: #fafafa; /* Primary action fill. Zinc ink, not brand green. */
+    --primary-foreground: #18181b; /* Text and icons on primary. */
+    --primary-hover: #e4e4e7; /* Primary action hover. */
+    --secondary: #27272a; /* Secondary button and quiet fill. */
+    --secondary-foreground: #fafafa; /* Text on secondary. */
+    --secondary-hover: #3f3f46; /* Secondary button hover. */
+    --muted: #27272a; /* Muted surface, code blocks and hover state. */
+    --muted-foreground: #a1a1aa; /* Secondary text. Passes 4.5:1 on background and muted in both themes. */
+    --accent: #27272a; /* Selected and hovered surface. */
+    --accent-foreground: #fafafa; /* Text on accent. */
+    --accent-hover: #3f3f46; /* Accent surface hover. */
+    --destructive: #991b1b; /* Destructive action fill. */
+    --destructive-foreground: #fafafa; /* Text on destructive. */
+    --destructive-hover: #b91c1c; /* Destructive action hover. */
+    --border: #3f3f46; /* Decorative 1px separators. */
+    --border-strong: #63636e; /* Interactive boundaries and outlined controls. 3:1 on background. */
+    --input: #63636e; /* Form control border. 3:1 on background. */
+    --ring: #d4d4d8; /* Keyboard focus ring. */
+    --link: #8acb9b; /* Inline link text. Accessible brand green. */
+    --link-hover: #a9d6b0; /* Inline link hover. */
+    --brand-text: #8acb9b; /* Accessible brand-colored text. */
+    --brand-cta: #8acb9b; /* Opt-in brand CTA fill. Not the default primary action. */
+    --brand-cta-foreground: #09090b; /* Text on the brand CTA. */
+    --info: #60a5fa; /* Info status. Icon and border; message text stays foreground. */
+    --success: #4ade80; /* Success status. Icon and border; message text stays foreground. */
+    --warning: #facc15; /* Warning status. Icon and border; message text stays foreground. */
+    --error: #f87171; /* Error status. Icon and border; message text stays foreground. */
+    --chart-1: #4ade80; /* Chart series 1. */
+    --chart-2: #60a5fa; /* Chart series 2. */
+    --chart-3: #fbbf24; /* Chart series 3. */
+    --chart-4: #f87171; /* Chart series 4. */
+    --chart-5: #2dd4bf; /* Chart series 5. */
+    --chart-6: #a78bfa; /* Chart series 6. */
+    --code-bg: #141416; /* Code block surface. */
+    --code-fg: #fafafa; /* Code block text. */
+    --code-muted: #a1a1aa; /* Code comments and line numbers. */
+    --code-keyword: #f0abfc; /* Code keyword. */
+    --code-string: #86efac; /* Code string. */
+    --code-number: #fbbf24; /* Code number. */
+    --code-function: #93c5fd; /* Code function. */
+    --code-variable: #fafafa; /* Code variable. */
+    --code-punctuation: #a1a1aa; /* Code punctuation. */
+    --overlay: rgb(0 0 0 / 0.64); /* Dialog backdrop. */
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.6), 0 1px 2px -1px rgb(0 0 0 / 0.5); /* Controls and small cards. */
+    --shadow: 0 8px 24px -8px rgb(0 0 0 / 0.7); /* Raised cards. */
+    --shadow-lg: 0 16px 48px -12px rgb(0 0 0 / 0.8); /* Dialogs and popovers. */
+  }
+}
+
+.uh-type-display {
+  font: var(--text-display);
+  letter-spacing: var(--type-display-tracking);
+  text-wrap: balance;
+}
+
+:lang(zh) .uh-type-display,
+.uh-type-display:lang(zh) {
   line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
-.heading-2 {
-  font-family: var(--font-sans);
-  font-size: 24px;
+
+.uh-type-heading-1 {
+  font: var(--text-heading-1);
+  letter-spacing: var(--type-heading-1-tracking);
+  text-wrap: balance;
+}
+
+:lang(zh) .uh-type-heading-1,
+.uh-type-heading-1:lang(zh) {
   line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-}
-.heading-3 {
-  font-family: var(--font-sans);
-  font-size: 20px;
-  line-height: 1.4;
-  font-weight: 600;
   letter-spacing: 0;
 }
-.heading-4 {
-  font-family: var(--font-sans);
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: 600;
+
+.uh-type-heading-2 {
+  font: var(--text-heading-2);
+  letter-spacing: var(--type-heading-2-tracking);
+  text-wrap: balance;
+}
+
+:lang(zh) .uh-type-heading-2,
+.uh-type-heading-2:lang(zh) {
+  line-height: 1.35;
   letter-spacing: 0;
 }
-.body {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.75;
-  font-weight: 400;
+
+.uh-type-heading-3 {
+  font: var(--text-heading-3);
+  letter-spacing: var(--type-heading-3-tracking);
+  text-wrap: balance;
+}
+
+:lang(zh) .uh-type-heading-3,
+.uh-type-heading-3:lang(zh) {
+  line-height: 1.5;
   letter-spacing: 0;
 }
-.small {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
+
+.uh-type-heading-4 {
+  font: var(--text-heading-4);
+  letter-spacing: var(--type-heading-4-tracking);
+  text-wrap: balance;
+}
+
+:lang(zh) .uh-type-heading-4,
+.uh-type-heading-4:lang(zh) {
+  line-height: 1.5;
   letter-spacing: 0;
 }
-.nav {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 600;
+
+.uh-type-body {
+  font: var(--text-body);
+  letter-spacing: var(--type-body-tracking);
+}
+
+:lang(zh) .uh-type-body,
+.uh-type-body:lang(zh) {
+  line-height: 1.8;
   letter-spacing: 0;
 }
-.label {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
+
+.uh-type-small {
+  font: var(--text-small);
+  letter-spacing: var(--type-small-tracking);
+}
+
+:lang(zh) .uh-type-small,
+.uh-type-small:lang(zh) {
+  line-height: 1.65;
   letter-spacing: 0;
 }
-.code {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.25rem;
-  font-weight: 400;
+
+.uh-type-nav {
+  font: var(--text-nav);
+  letter-spacing: var(--type-nav-tracking);
+}
+
+:lang(zh) .uh-type-nav,
+.uh-type-nav:lang(zh) {
+  line-height: 1.6;
   letter-spacing: 0;
 }
-.kbd {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  line-height: 1;
-  font-weight: 500;
+
+.uh-type-label {
+  font: var(--text-label);
+  letter-spacing: var(--type-label-tracking);
+}
+
+:lang(zh) .uh-type-label,
+.uh-type-label:lang(zh) {
+  line-height: 1.5;
   letter-spacing: 0;
 }
-@font-face { font-family: "Geist"; src: url("fonts/Geist.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
-@font-face { font-family: "Geist Mono"; src: url("fonts/GeistMono.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+.uh-type-field-label {
+  font: var(--text-field-label);
+  letter-spacing: var(--type-field-label-tracking);
+}
+
+:lang(zh) .uh-type-field-label,
+.uh-type-field-label:lang(zh) {
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.uh-type-code {
+  font: var(--text-code);
+  letter-spacing: var(--type-code-tracking);
+}
+
+:lang(zh) .uh-type-code,
+.uh-type-code:lang(zh) {
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.uh-type-kbd {
+  font: var(--text-kbd);
+  letter-spacing: var(--type-kbd-tracking);
+}
+
+.uh-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.uh-measure {
+  max-width: var(--measure);
+}

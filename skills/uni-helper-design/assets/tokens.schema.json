@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uni-helper.dev/design/tokens.schema.json",
+  "title": "uni-helper design tokens",
+  "type": "object",
+  "required": ["name", "version", "color", "type", "spacing", "radius", "shadow", "motion"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "color": {
+      "type": "object",
+      "required": ["themes", "tokens"],
+      "properties": {
+        "themes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "enum": ["light", "dark"] },
+              "name": { "type": "string" }
+            }
+          }
+        },
+        "tokens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "value"],
+            "properties": {
+              "name": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+              "value": {
+                "oneOf": [
+                  { "type": "string" },
+                  {
+                    "type": "object",
+                    "required": ["light", "dark"],
+                    "properties": {
+                      "light": { "type": "string" },
+                      "dark": { "type": "string" }
+                    },
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "usage": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "type": {
+      "type": "object",
+      "required": ["fonts", "families", "groups"],
+      "properties": {
+        "fonts": { "type": "array" },
+        "families": {
+          "type": "object",
+          "required": ["sans", "mono"],
+          "additionalProperties": { "type": "string" }
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "family", "fontFamily", "fontSize", "lineHeight", "fontWeight"],
+            "properties": {
+              "name": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+              "family": { "enum": ["sans", "mono"] },
+              "fontFamily": { "type": "string" },
+              "fontSize": { "type": "string" },
+              "fluidSize": { "type": "string" },
+              "lineHeight": { "type": "string" },
+              "fontWeight": { "type": "number" },
+              "letterSpacing": { "type": "string" },
+              "usage": { "type": "string" },
+              "cjk": {
+                "type": "object",
+                "properties": {
+                  "lineHeight": { "type": "string" },
+                  "letterSpacing": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "spacing": { "$ref": "#/$defs/tokenGroup" },
+    "radius": { "$ref": "#/$defs/tokenGroup" },
+    "border": { "$ref": "#/$defs/tokenGroup" },
+    "shadow": { "$ref": "#/$defs/themeTokenGroup" },
+    "motion": {
+      "type": "object",
+      "required": ["durations", "easings"],
+      "properties": {
+        "durations": { "$ref": "#/$defs/valueGroup" },
+        "easings": { "$ref": "#/$defs/valueGroup" }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "required": ["breakpoints", "tokens"],
+      "properties": {
+        "breakpoints": { "$ref": "#/$defs/valueGroup" },
+        "tokens": { "type": "array", "items": { "$ref": "#/$defs/token" } }
+      }
+    },
+    "control": { "$ref": "#/$defs/tokenGroup" },
+    "icon": { "$ref": "#/$defs/tokenGroup" },
+    "opacity": { "$ref": "#/$defs/tokenGroup" }
+  },
+  "$defs": {
+    "token": {
+      "type": "object",
+      "required": ["name", "value"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "value": { "type": "string" },
+        "usage": { "type": "string" }
+      }
+    },
+    "tokenGroup": {
+      "type": "object",
+      "required": ["tokens"],
+      "properties": {
+        "tokens": { "type": "array", "items": { "$ref": "#/$defs/token" } }
+      }
+    },
+    "valueGroup": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/token" }
+    },
+    "themeToken": {
+      "type": "object",
+      "required": ["name", "value"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "value": {
+          "type": "object",
+          "required": ["light", "dark"],
+          "properties": {
+            "light": { "type": "string" },
+            "dark": { "type": "string" }
+          }
+        },
+        "usage": { "type": "string" }
+      }
+    },
+    "themeTokenGroup": {
+      "type": "object",
+      "required": ["tokens"],
+      "properties": {
+        "tokens": { "type": "array", "items": { "$ref": "#/$defs/themeToken" } }
+      }
+    }
+  }
+}
