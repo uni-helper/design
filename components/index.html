@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>uni-helper design system</title>
+  <link rel="icon" href="../assets/logos/uni-helper-favicon.ico">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font: 400 16px/1.75 var(--font-sans);
+    }
+    a { color: inherit; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      height: 56px;
+      padding: 0 var(--space-6);
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--background) 92%, transparent);
+      backdrop-filter: blur(12px);
+    }
+    .site-brand { display: flex; align-items: center; gap: var(--space-3); font-weight: 700; text-decoration: none; }
+    .site-brand img { width: 28px; height: 28px; }
+    .site-nav { display: flex; align-items: center; gap: var(--space-2); font: 600 14px/20px var(--font-sans); }
+    .site-nav a { padding: 6px 10px; border-radius: var(--radius-md); text-decoration: none; color: var(--muted-foreground); }
+    .site-nav a:hover { background: var(--muted); color: var(--foreground); }
+    main { max-width: 1120px; margin: 0 auto; padding: var(--space-10) var(--space-6) var(--space-24); }
+    .intro { display: flex; flex-direction: column; gap: var(--space-4); max-width: 720px; margin-bottom: var(--space-16); }
+    .intro img { width: 96px; height: 96px; }
+    .intro h1 { margin: 0; font: 800 36px/1.1 var(--font-sans); letter-spacing: -0.025em; }
+    .intro p { margin: 0; color: var(--muted-foreground); }
+    section { scroll-margin-top: 80px; padding: var(--space-8) 0; border-top: 1px solid var(--border); }
+    section > h2 { margin: 0 0 var(--space-2); font: 600 30px/1.2 var(--font-sans); letter-spacing: -0.025em; }
+    section > p { margin: 0 0 var(--space-6); color: var(--muted-foreground); max-width: 640px; }
+    .panel { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--card); padding: var(--space-6); }
+    .panel + .panel { margin-top: var(--space-4); }
+    .panel h3 { margin: 0 0 var(--space-4); font: 600 18px/1.4 var(--font-sans); }
+    .row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+    .col { display: flex; flex-direction: column; gap: var(--space-3); max-width: 420px; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-3); }
+    .swatch { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .swatch div { height: 64px; background: var(--swatch); }
+    .swatch p { margin: 0; padding: var(--space-2) var(--space-3); font: 500 12px/16px var(--font-mono); color: var(--muted-foreground); }
+    .scale { display: flex; align-items: flex-end; gap: var(--space-3); }
+    .scale div { background: var(--primary); border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+    .type-sample { display: flex; flex-direction: column; gap: var(--space-3); }
+    .type-sample p { margin: 0; }
+    .cover-art { display: flex; gap: var(--space-3); align-items: flex-end; }
+    .cover-art span { display: block; }
+    @media (max-width: 720px) {
+      .site-nav { display: none; }
+      main { padding-top: var(--space-6); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-brand" href="#top">
+      <img src="../assets/logos/uni-helper-mark-green.svg" alt="">
+      uni-helper
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#color">Color</a>
+      <a href="#type">Type</a>
+      <a href="#components">Components</a>
+      <a href="#assets">Assets</a>
+    </nav>
+    <button class="uh-btn uh-btn--outline uh-btn--sm" id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+  </header>
+
+  <main id="top">
+    <div class="intro">
+      <img src="../assets/logos/uni-helper-mark-green.svg" alt="uni-helper mark">
+      <h1>uni-helper design system</h1>
+      <p>中性色为底，品牌绿只用于标志和图形。字体、间距、圆角与控件规则集中在 <code class="code">DESIGN.md</code> 和 <code class="code">tokens.css</code>。</p>
+      <div class="row">
+        <a class="uh-ihb" href="#components">
+          <span class="uh-ihb__dot"></span>
+          <span class="uh-ihb__label">查看组件</span>
+          <span class="uh-ihb__hover">查看组件
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <section id="color">
+      <h2>Color</h2>
+      <p>中性色承担界面，品牌绿承担身份，状态色只用于边框和图标。</p>
+      <div class="panel">
+        <h3>Surfaces and text</h3>
+        <div class="swatches">
+          <div class="swatch"><div style="--swatch: var(--background)"></div><p>background</p></div>
+          <div class="swatch"><div style="--swatch: var(--foreground)"></div><p>foreground</p></div>
+          <div class="swatch"><div style="--swatch: var(--muted)"></div><p>muted</p></div>
+          <div class="swatch"><div style="--swatch: var(--muted-foreground)"></div><p>muted-foreground</p></div>
+          <div class="swatch"><div style="--swatch: var(--border)"></div><p>border</p></div>
+          <div class="swatch"><div style="--swatch: var(--primary)"></div><p>primary</p></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Brand</h3>
+        <div class="swatches">
+          <div class="swatch"><div style="--swatch: var(--brand)"></div><p>brand</p></div>
+          <div class="swatch"><div style="--swatch: var(--brand-deep)"></div><p>brand-deep</p></div>
+          <div class="swatch"><div style="--swatch: var(--brand-mint)"></div><p>brand-mint</p></div>
+          <div class="swatch"><div style="--swatch: var(--brand-soft)"></div><p>brand-soft</p></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Status</h3>
+        <div class="swatches">
+          <div class="swatch"><div style="--swatch: var(--info)"></div><p>info</p></div>
+          <div class="swatch"><div style="--swatch: var(--success)"></div><p>success</p></div>
+          <div class="swatch"><div style="--swatch: var(--warning)"></div><p>warning</p></div>
+          <div class="swatch"><div style="--swatch: var(--error)"></div><p>error</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="type">
+      <h2>Typography</h2>
+      <p>Geist 与 Geist Mono。中文回退到 Noto Sans SC 或系统 CJK 字体。</p>
+      <div class="panel type-sample">
+        <p class="display">display 36 / 1.1</p>
+        <p class="heading-1">heading-1 30 / 1.2</p>
+        <p class="heading-2">heading-2 24 / 1.3</p>
+        <p class="heading-3">heading-3 20</p>
+        <p class="heading-4">heading-4 18</p>
+        <p class="body">body 16 / 1.75。用于文档正文。中文段落在这里显示回退字体。</p>
+        <p class="small">small 14 / 20。用于表格、说明和次要信息。</p>
+        <p class="code">const system = 'uni-helper'</p>
+      </div>
+    </section>
+
+    <section id="components">
+      <h2>Components</h2>
+      <p>九个基础控件。样式在 <code class="code">components.css</code>，值来自 <code class="code">tokens.css</code>。</p>
+
+      <div class="panel">
+        <h3>Button</h3>
+        <div class="row">
+          <button class="uh-btn uh-btn--default" type="button">新建项目</button>
+          <button class="uh-btn uh-btn--secondary" type="button">Secondary</button>
+          <button class="uh-btn uh-btn--outline" type="button">Outline</button>
+          <button class="uh-btn uh-btn--ghost" type="button">Ghost</button>
+          <button class="uh-btn uh-btn--destructive" type="button">Delete</button>
+          <button class="uh-btn uh-btn--link" type="button">Link</button>
+        </div>
+        <div class="row" style="margin-top: var(--space-4)">
+          <button class="uh-btn uh-btn--default uh-btn--sm" type="button">Small</button>
+          <button class="uh-btn uh-btn--default" type="button">Default</button>
+          <button class="uh-btn uh-btn--default uh-btn--lg" type="button">Large</button>
+          <button class="uh-btn uh-btn--outline uh-btn--icon" type="button" aria-label="Add">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <button class="uh-btn uh-btn--default" type="button" disabled>Disabled</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Badge</h3>
+        <div class="row">
+          <span class="uh-badge uh-badge--default">已发布</span>
+          <span class="uh-badge uh-badge--secondary">Beta</span>
+          <span class="uh-badge uh-badge--outline">WIP</span>
+          <span class="uh-badge uh-badge--destructive">Deprecated</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Input and label</h3>
+        <div class="col">
+          <label class="uh-label" for="demo-input">包名</label>
+          <input class="uh-input" id="demo-input" type="text" placeholder="@uni-helper/uni-use">
+          <label class="uh-label" for="demo-input-required">版本<span class="uh-label__required">*</span></label>
+          <input class="uh-input" id="demo-input-required" type="text" value="0.9.0">
+          <input class="uh-input" type="text" value="Disabled" disabled>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Checkbox</h3>
+        <div class="col">
+          <label class="uh-check-row"><input class="uh-checkbox" type="checkbox" checked> ESLint</label>
+          <label class="uh-check-row"><input class="uh-checkbox" type="checkbox"> TypeScript</label>
+          <label class="uh-check-row"><input class="uh-checkbox" type="checkbox" disabled> Disabled</label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Alert</h3>
+        <div class="col" style="max-width:none">
+          <div class="uh-alert">
+            <span class="uh-alert__icon"></span>
+            <div>
+              <p class="uh-alert__title">Default</p>
+              <p class="uh-alert__body">The package ships with TypeScript types.</p>
+            </div>
+          </div>
+          <div class="uh-alert uh-alert--info">
+            <span class="uh-alert__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+            <div>
+              <p class="uh-alert__title">Info</p>
+              <p class="uh-alert__body">Run <code class="code">pnpm dev</code> before opening the playground.</p>
+            </div>
+          </div>
+          <div class="uh-alert uh-alert--warning">
+            <span class="uh-alert__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3 2 21h20L12 3z"/><path d="M12 9v5M12 17h.01"/></svg></span>
+            <div>
+              <p class="uh-alert__title">Warning</p>
+              <p class="uh-alert__body">Manifest fields are generated; edit the source file instead.</p>
+            </div>
+          </div>
+          <div class="uh-alert uh-alert--success">
+            <span class="uh-alert__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18h6M10 22h4"/><path d="M12 2a6 6 0 0 0-4 10c1 1 2 2 2 4h4c0-2 1-3 2-4a6 6 0 0 0-4-10z"/></svg></span>
+            <div>
+              <p class="uh-alert__title">Success</p>
+              <p class="uh-alert__body">Pages manifest is in sync.</p>
+            </div>
+          </div>
+          <div class="uh-alert uh-alert--danger">
+            <span class="uh-alert__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3 2 21h20L12 3z"/><path d="M12 9v5M12 17h.01"/></svg></span>
+            <div>
+              <p class="uh-alert__title">Danger</p>
+              <p class="uh-alert__body">The build failed: fix the type error before exporting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Kbd</h3>
+        <div class="row">
+          <span class="uh-kbd">⌘</span><span class="uh-kbd">K</span>
+          <span class="uh-muted">搜索</span>
+          <span class="uh-kbd">M</span>
+          <span class="uh-muted">切换菜单</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Card</h3>
+        <a class="uh-card" href="#components">
+          <div class="uh-card__media">
+            <svg width="96" height="96" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+              <path d="M44 66a22 22 0 1 1 22-22v22H44z" fill="var(--brand-soft)"/>
+              <path d="M20 52a22 22 0 1 1 22 22H20V52z" fill="var(--brand-deep)"/>
+              <circle cx="66" cy="66" r="20" fill="var(--brand)"/>
+            </svg>
+          </div>
+          <div class="uh-card__body">
+            <h3 class="uh-card__title">vite-plugin-uni-pages</h3>
+            <p class="uh-card__description">File-based routing for uni-app, with typed page metadata and a generated pages manifest.</p>
+          </div>
+          <div class="uh-card__footer">
+            <span>@uni-helper</span>
+            <span>v0.9</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="panel">
+        <h3>InteractiveHoverButton</h3>
+        <div class="row">
+          <button class="uh-ihb" type="button">
+            <span class="uh-ihb__dot"></span>
+            <span class="uh-ihb__label">开始使用</span>
+            <span class="uh-ihb__hover">开始使用
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+          <button class="uh-ihb" type="button">
+            <span class="uh-ihb__dot"></span>
+            <span class="uh-ihb__label">查看文档</span>
+            <span class="uh-ihb__hover">查看文档
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="assets">
+      <h2>Assets</h2>
+      <p>标志、图标和社交图在 <code class="code">assets/</code>。字体在 <code class="code">fonts/</code>。</p>
+      <div class="panel">
+        <h3>Marks</h3>
+        <div class="row">
+          <img src="../assets/logos/uni-helper-mark.svg" alt="uni-helper mark" width="72" height="72">
+          <img src="../assets/logos/uni-helper-mark-green.svg" alt="uni-helper mark, green" width="72" height="72">
+          <img src="../assets/logos/unocss-preset-uni-mark.svg" alt="unocss-preset-uni mark" width="72" height="72">
+          <img src="../assets/logos/devtools-mark.svg" alt="devtools mark" width="72" height="72">
+          <img src="../assets/logos/desktop-mark.svg" alt="desktop mark" width="72" height="72">
+          <img src="../assets/logos/create-uni-mark.svg" alt="create-uni mark" width="72" height="72">
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Social</h3>
+        <img src="../assets/social/uni-helper-og.png" alt="uni-helper social card" style="display:block;max-width:100%;border-radius:var(--radius-lg);border:1px solid var(--border)">
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle')
+    toggle.addEventListener('click', () => {
+      const dark = document.documentElement.dataset.theme !== 'dark'
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      toggle.setAttribute('aria-pressed', String(dark))
+      toggle.textContent = dark ? 'Light mode' : 'Dark mode'
+    })
+  </script>
+</body>
+</html>
