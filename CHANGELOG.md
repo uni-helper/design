@@ -1,3 +1,19 @@
+# Changelog
+
+## 0.1.0 (2026-11-27)
+
+### Features
+
+* add integration bridges, docs, and the design skill ([a2044ee](https://github.com/uni-helper/design/commit/a2044ee0d346d62fa40a4cda2cf23a948392bc0f))
+* add shadcn/ui Base UI integration ([212a49a](https://github.com/uni-helper/design/commit/212a49abdfb610c60bd9164af62763a954e5ab15))
+* add uni-helper design system ([a0ed346](https://github.com/uni-helper/design/commit/a0ed3469f1ed4f1d22faeb4f05b0a3ca01d8583c))
+* rebuild the token and component system for 0.1.0 ([f1eee53](https://github.com/uni-helper/design/commit/f1eee532ce500bdcba5c9e7bf8ff0a06a20d24a0))
+
+### Bug Fixes
+
+* add the conventionalcommits changelog preset ([f0fb0ff](https://github.com/uni-helper/design/commit/f0fb0ff44418a975a04865e758d7daaac81652c6))
+* map the shadcn radius and document the font import ([6c9508f](https://github.com/uni-helper/design/commit/6c9508f1afe47280d76f91693eb32a8088c1e0ac))
+
 The first release of the complete system. `tokens.json` is now the only source of truth.
 
 ### Added

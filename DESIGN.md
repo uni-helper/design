@@ -1,5 +1,5 @@
 ---
-version: 0.0.0
+version: 0.1.0
 name: uni-helper
 description: "A neutral-first design system for uni-app tooling, documentation, and developer interfaces."
 colors:
