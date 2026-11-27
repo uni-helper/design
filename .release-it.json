@@ -11,7 +11,7 @@
     "release": false
   },
   "hooks": {
-    "after:bump": "node scripts/sync-version.mjs && node scripts/build.mjs && git add tokens.json tokens.css DESIGN.md components docs integrations skills"
+    "after:bump": "node scripts/sync-version.ts && node scripts/build.ts && git add tokens.json tokens.css DESIGN.md components docs integrations skills"
   },
   "plugins": {
     "@release-it/conventional-changelog": {

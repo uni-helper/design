@@ -1,14 +1,15 @@
 # Integration
 
-The system ships three entry points:
+The system ships four entry points:
 
-| File                        | Use                                                                     |
-| --------------------------- | ----------------------------------------------------------------------- |
-| `tokens.css`                | A plain CSS project. Variables, type classes, and `@font-face`.         |
-| `integrations/tailwind.css` | Tailwind CSS v4. Adds the token sheet and a `@theme inline` bridge.     |
-| `integrations/nuxt-ui.css`  | Nuxt UI v4. Adds the token sheet and maps Nuxt UI's semantic variables. |
+| File                         | Use                                                                         |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| `tokens.css`                 | A plain CSS project. Variables, type classes, and `@font-face`.             |
+| `integrations/tailwind.css`  | Tailwind CSS v4. Adds the token sheet and a `@theme inline` bridge.         |
+| `integrations/nuxt-ui.css`   | Nuxt UI v4. Adds the token sheet and maps Nuxt UI's semantic variables.     |
+| `integrations/shadcn-ui.css` | shadcn/ui with Base UI. Adds the dark variant, sidebar aliases, and radius. |
 
-All three read from the generated token sheet. Do not copy values out of the tables in the documentation; use the variables.
+All four read from the generated token sheet. Do not copy values out of the tables in the documentation; use the variables.
 
 ## Plain CSS
 
@@ -161,6 +162,94 @@ Set `primary` and `neutral` to `zinc` so the palette shades that Nuxt UI still g
 The system's primary action is ink. Do not set `primary: 'green'` to make the brand green the main button. If you need one brand moment, use `uh-btn--brand` or `--brand-cta` directly, and keep it rare.
 
 Nuxt UI's colour mode toggles `.dark` on `<html>`. The token sheet supports that class, so no extra dark selector is needed. If you use Nuxt UI's `useColorMode`, keep the explicit `data-theme` in sync only if another part of the page reads it.
+
+## shadcn/ui (Base UI)
+
+The bridge targets the Base UI component library. Initialize shadcn with `-b base`:
+
+```bash
+pnpm add -D @uni-helper/design
+pnpm dlx shadcn@latest init -b base
+pnpm dlx shadcn@latest add button dialog field input label
+```
+
+Replace the theme that `init` writes to your global stylesheet with the design system imports:
+
+```css
+/* app/assets/css/main.css */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@uni-helper/design/shadcn-ui.css";
+```
+
+Keep the `tw-animate-css` and `shadcn/tailwind.css` imports. The first provides the animation utilities; the second provides the data-state variants that Base UI components use. Delete the generated `@theme inline`, `:root`, and `.dark` blocks; the design tokens supply the colors and the `.dark` theme.
+
+The bridge maps:
+
+| shadcn/ui                                                                                                                                                                               | uni-helper                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `--background`, `--foreground`, `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`, `--input`, `--ring`, `--chart-1` ... `--chart-5` | same names in `tokens.css` |
+| `--sidebar`                                                                                                                                                                             | `--muted`                  |
+| `--sidebar-foreground`                                                                                                                                                                  | `--foreground`             |
+| `--sidebar-primary`                                                                                                                                                                     | `--primary`                |
+| `--sidebar-primary-foreground`                                                                                                                                                          | `--primary-foreground`     |
+| `--sidebar-accent`                                                                                                                                                                      | `--accent`                 |
+| `--sidebar-accent-foreground`                                                                                                                                                           | `--accent-foreground`      |
+| `--sidebar-border`                                                                                                                                                                      | `--border`                 |
+| `--sidebar-ring`                                                                                                                                                                        | `--ring`                   |
+| `--radius`                                                                                                                                                                              | `--radius-md`              |
+
+The shadcn components use the `.dark` class for dark mode. The token sheet supports that class. Set `.dark` from the theme provider or color-mode library; `data-theme="dark"` alone does not trigger the shadcn `dark:` variants. Do not copy the shadcn default palette into the app.
+
+The components stay as shadcn ships them. Their semantic classes resolve to the design tokens. A Base UI dialog:
+
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Field, FieldGroup } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+export function EditProfileDialog() {
+  return (
+    <Dialog>
+      <form>
+        <DialogTrigger render={<Button variant="outline" />}>编辑资料</DialogTrigger>
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>编辑资料</DialogTitle>
+            <DialogDescription>修改后点击保存。</DialogDescription>
+          </DialogHeader>
+          <FieldGroup>
+            <Field>
+              <Label htmlFor="name">名字</Label>
+              <Input id="name" name="name" defaultValue="张三" />
+            </Field>
+            <Field>
+              <Label htmlFor="username">用户名</Label>
+              <Input id="username" name="username" defaultValue="@zhangsan" />
+            </Field>
+          </FieldGroup>
+          <DialogFooter>
+            <DialogClose render={<Button variant="outline" />}>取消</DialogClose>
+            <Button type="submit">保存</Button>
+          </DialogFooter>
+        </DialogContent>
+      </form>
+    </Dialog>
+  );
+}
+```
 
 ## Migrating an existing HSL theme
 

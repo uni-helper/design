@@ -6,26 +6,16 @@ import {
   generatedFiles,
   generateFrontmatter,
   replaceFrontmatter,
-} from "./lib/tokens.mjs";
+} from "./lib/tokens.ts";
 
-/**
- * @param {string} relativePath
- * @param {string} content
- * @returns {string}
- */
-function write(relativePath, content) {
+function write(relativePath: string, content: string): string {
   const target = path.join(ROOT, relativePath);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.writeFileSync(target, content);
   return relativePath;
 }
 
-/**
- * @param {string} from
- * @param {string} to
- * @returns {string}
- */
-function copyFile(from, to) {
+function copyFile(from: string, to: string): string {
   const source = path.join(ROOT, from);
   const target = path.join(ROOT, to);
   fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -33,12 +23,7 @@ function copyFile(from, to) {
   return to;
 }
 
-/**
- * @param {string} from
- * @param {string} to
- * @returns {string}
- */
-function copyDirectory(from, to) {
+function copyDirectory(from: string, to: string): string {
   const source = path.join(ROOT, from);
   const target = path.join(ROOT, to);
   fs.rmSync(target, { recursive: true, force: true });
@@ -48,7 +33,7 @@ function copyDirectory(from, to) {
 }
 
 const tokens = loadTokens();
-const written = [];
+const written: string[] = [];
 
 for (const [relativePath, content] of Object.entries(generatedFiles(tokens))) {
   written.push(write(relativePath, content));

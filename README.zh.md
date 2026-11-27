@@ -110,6 +110,17 @@ export default defineAppConfig({
 });
 ```
 
+### shadcn/ui（Base UI）
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@uni-helper/design/shadcn-ui.css";
+```
+
+运行 `pnpm dlx shadcn@latest init -b base`，然后删除 `init` 写入的主题块。桥接层会把侧边栏颜色和圆角映射到设计 token。Base UI 对话框示例见 [docs/integration.md](docs/integration.md)。
+
 主题切换、从 HSL 变量迁移以及完整映射见 [docs/integration.md](docs/integration.md)。
 
 ## 仓库内容
@@ -142,7 +153,7 @@ pnpm fix     # 应用格式和安全 lint 修复
 pnpm test    # Vitest 设计检查与组件测试
 ```
 
-开发环境使用 Vite+，需要 Node 22.18+、24.11+ 或 26+。
+仓库在 `.node-version` 中固定 Node 26。发布的包支持 Node `^22.18`、`^24.11` 或 `>=26`。
 
 生成文件保留生成器的格式；`pnpm test` 会检查它们是否最新。
 

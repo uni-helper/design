@@ -5,92 +5,71 @@ import { fileURLToPath } from "node:url";
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(here, "../..");
 
-/**
- * @typedef {Object} Token
- * @property {string} name
- * @property {string | { light: string, dark: string }} value
- * @property {string} [usage]
- */
+export type Token = {
+  name: string;
+  value: string | { light: string; dark: string };
+  usage?: string;
+};
 
-/**
- * @typedef {Object} Section
- * @property {Token[]} tokens
- */
+type Section = { tokens: Token[] };
 
-/**
- * @typedef {Object} ColorSection
- * @property {Token[]} tokens
- * @property {Array<{ id: string, name: string }>} themes
- */
+type ColorSection = Section & { themes: Array<{ id: string; name: string }> };
 
-/**
- * @typedef {Object} TypeGroup
- * @property {string} name
- * @property {'sans' | 'mono'} family
- * @property {string} fontFamily
- * @property {string} fontSize
- * @property {string} [fluidSize]
- * @property {string} lineHeight
- * @property {number} fontWeight
- * @property {string} [letterSpacing]
- * @property {string} [usage]
- * @property {{ lineHeight: string, letterSpacing?: string }} [cjk]
- */
+type TypeGroup = {
+  name: string;
+  family: "sans" | "mono";
+  fontFamily: string;
+  fontSize: string;
+  fluidSize?: string;
+  lineHeight: string;
+  fontWeight: number;
+  letterSpacing?: string;
+  usage?: string;
+  cjk?: { lineHeight: string; letterSpacing?: string };
+};
 
-/**
- * @typedef {Object} TypeSection
- * @property {TypeGroup[]} groups
- * @property {{ sans: string, mono: string }} families
- * @property {Array<{ family: string, file: string, weight: string, style: string }>} fonts
- */
+type TypeSection = {
+  groups: TypeGroup[];
+  families: { sans: string; mono: string };
+  fonts: Array<{ family: string; file: string; weight: string; style: string }>;
+};
 
-/**
- * @typedef {Object} LayoutSection
- * @property {Token[]} tokens
- * @property {Array<{ name: string, value: string, usage?: string }>} breakpoints
- */
+type LayoutSection = {
+  tokens: Token[];
+  breakpoints: Array<{ name: string; value: string; usage?: string }>;
+};
 
-/**
- * @typedef {Object} MotionSection
- * @property {Array<{ name: string, value: string, usage?: string }>} durations
- * @property {Array<{ name: string, value: string, usage?: string }>} easings
- */
+type MotionSection = {
+  durations: Array<{ name: string; value: string; usage?: string }>;
+  easings: Array<{ name: string; value: string; usage?: string }>;
+};
 
-/**
- * @typedef {Object} TokenFile
- * @property {string} name
- * @property {string} version
- * @property {ColorSection} color
- * @property {TypeSection} type
- * @property {Section} shadow
- * @property {Section} spacing
- * @property {Section} radius
- * @property {Section} border
- * @property {LayoutSection} layout
- * @property {Section} control
- * @property {Section} icon
- * @property {Section} opacity
- * @property {MotionSection} motion
- */
+export type TokenFile = {
+  name: string;
+  version: string;
+  color: ColorSection;
+  type: TypeSection;
+  shadow: Section;
+  spacing: Section;
+  radius: Section;
+  border: Section;
+  layout: LayoutSection;
+  control: Section;
+  icon: Section;
+  opacity: Section;
+  motion: MotionSection;
+};
 
-/**
- * @returns {TokenFile}
- */
-export function loadTokens() {
+export function loadTokens(): TokenFile {
   // tokens.json is validated by tokens.schema.json in CI.
-  return /** @type {TokenFile} */ (
-    JSON.parse(fs.readFileSync(path.join(ROOT, "tokens.json"), "utf8"))
-  );
+  return JSON.parse(fs.readFileSync(path.join(ROOT, "tokens.json"), "utf8"));
 }
 
-/**
- * @param {Section} section
- * @param {'light' | 'dark'} theme
- * @returns {Array<[string, string, string | undefined]>}
- */
-export function themeEntries(section, theme) {
-  /** @type {Array<[string, string, string | undefined]>} */
-  const entries = [];
+export function themeEntries(
+  section: Section,
+  theme: "light" | "dark",
+): Array<[string, string, string | undefined]> {
+  const entries: Array<[string, string, string | undefined]> = [];
   for (const token of section.tokens) {
     if (typeof token.value === "object") {
       entries.push([token.name, token.value[theme], token.usage]);
@@ -99,13 +78,8 @@ export function themeEntries(section, theme) {
   return entries;
 }
 
-/**
- * @param {Section} section
- * @returns {Array<[string, string, string | undefined]>}
- */
-export function constantEntries(section) {
-  /** @type {Array<[string, string, string | undefined]>} */
-  const entries = [];
+export function constantEntries(section: Section): Array<[string, string, string | undefined]> {
+  const entries: Array<[string, string, string | undefined]> = [];
   for (const token of section.tokens) {
     if (typeof token.value === "string") {
       entries.push([token.name, token.value, token.usage]);
@@ -114,33 +88,17 @@ export function constantEntries(section) {
   return entries;
 }
 
-/**
- * @param {string} name
- * @param {string} value
- * @param {string} [usage]
- * @returns {string}
- */
-function declaration(name, value, usage) {
+function declaration(name: string, value: string, usage?: string): string {
   const comment = usage ? ` /* ${usage} */` : "";
   return `  --${name}: ${value};${comment}`;
 }
 
-/**
- * @param {string} selector
- * @param {string[]} lines
- * @param {string} [indent]
- * @returns {string}
- */
-function block(selector, lines, indent = "") {
+function block(selector: string, lines: string[], indent: string = ""): string {
   if (!lines.length) return "";
   return `${indent}${selector} {\n${lines.map((line) => `${indent}${line}`).join("\n")}\n${indent}}\n`;
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string[]}
- */
-function primitiveLines(tokens) {
+function primitiveLines(tokens: TokenFile): string[] {
   const lines = [];
   for (const section of [tokens.spacing, tokens.radius, tokens.border]) {
     for (const [name, value, usage] of constantEntries(section)) {
@@ -171,11 +129,7 @@ function primitiveLines(tokens) {
   return lines;
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string[]}
- */
-function typeLines(tokens) {
+function typeLines(tokens: TokenFile): string[] {
   const lines = [];
   const sans = tokens.type.families.sans;
   const mono = tokens.type.families.mono;
@@ -194,11 +148,7 @@ function typeLines(tokens) {
   return lines;
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string}
- */
-function typeClasses(tokens) {
+function typeClasses(tokens: TokenFile): string {
   const chunks = [];
   for (const group of tokens.type.groups) {
     const lines = [
@@ -222,11 +172,7 @@ function typeClasses(tokens) {
   return chunks.join("\n");
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string}
- */
-function fontFaces(tokens) {
+function fontFaces(tokens: TokenFile): string {
   return tokens.type.fonts
     .map(
       (font) =>
@@ -235,11 +181,7 @@ function fontFaces(tokens) {
     .join("\n");
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string}
- */
-export function generateTokensCss(tokens) {
+export function generateTokensCss(tokens: TokenFile): string {
   const lightColors = themeEntries(tokens.color, "light").map(([name, value, usage]) =>
     declaration(name, value, usage),
   );
@@ -285,11 +227,7 @@ ${typeClasses(tokens)}
 `;
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string}
- */
-export function generateTailwindCss(tokens) {
+export function generateTailwindCss(tokens: TokenFile): string {
   const colors = tokens.color.tokens
     .map((token) => `  --color-${token.name}: var(--${token.name});`)
     .join("\n");
@@ -327,10 +265,7 @@ ${shadows}
 `;
 }
 
-/**
- * @returns {string}
- */
-export function generateNuxtUiCss() {
+export function generateNuxtUiCss(): string {
   return `/* Nuxt UI v4 bridge. Import after tokens.css and Nuxt UI's own theme. */
 @import "../tokens.css";
 
@@ -368,28 +303,35 @@ export function generateNuxtUiCss() {
 `;
 }
 
-/**
- * @param {Token} token
- * @param {'light' | 'dark'} theme
- * @returns {string}
- */
-function colorValue(token, theme) {
+export function generateShadcnUiCss(): string {
+  return `/* shadcn/ui Base UI bridge. Import after Tailwind and shadcn/tailwind.css. */
+@import "./tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius: var(--radius-md);
+  --color-sidebar: var(--muted);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
+`;
+}
+
+function colorValue(token: Token, theme: "light" | "dark"): string {
   return typeof token.value === "string" ? token.value : token.value[theme];
 }
 
-/**
- * @param {string[]} rows
- * @returns {string}
- */
-function table(rows) {
+function table(rows: string[]): string {
   return rows.join("\n");
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string}
- */
-export function generateTokensDoc(tokens) {
+export function generateTokensDoc(tokens: TokenFile): string {
   const colorRows = tokens.color.tokens.map((token) => {
     const light = colorValue(token, "light");
     const dark = colorValue(token, "dark");
@@ -399,8 +341,7 @@ export function generateTokensDoc(tokens) {
     const size = group.fluidSize ? `${group.fontSize} (${group.fluidSize})` : group.fontSize;
     return `| \`${group.name}\` | ${group.fontFamily} | ${size} | ${group.lineHeight} | ${group.fontWeight} | \`${group.letterSpacing || "0"}\` | ${group.usage || ""} |`;
   });
-  /** @param {Section} section @returns {string[]} */
-  const simple = (section) =>
+  const simple = (section: Section): string[] =>
     constantEntries(section).map(
       ([name, value, usage]) => `| \`${name}\` | \`${value}\` | ${usage || ""} |`,
     );
@@ -514,11 +455,7 @@ ${table(simple(tokens.opacity))}
 `;
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string}
- */
-export function generateSkillFoundations(tokens) {
+export function generateSkillFoundations(tokens: TokenFile): string {
   return generateTokensDoc(tokens)
     .replace("# Tokens\n", "# Foundations\n")
     .replace(
@@ -528,10 +465,7 @@ export function generateSkillFoundations(tokens) {
     .replace("are audited in `tests/design.test.ts`.", "are audited against these floors.");
 }
 
-/**
- * @returns {string}
- */
-export function generateSkillComponents() {
+export function generateSkillComponents(): string {
   return fs
     .readFileSync(path.join(ROOT, "docs/components.md"), "utf8")
     .replaceAll("components/components.css", "assets/components.css")
@@ -544,19 +478,11 @@ export function generateSkillComponents() {
     .replace("Load the token sheet first, then the component sheet. ", "");
 }
 
-/**
- * @param {string | number} value
- * @returns {string}
- */
-function yamlString(value) {
+function yamlString(value: string | number): string {
   return JSON.stringify(String(value));
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {string}
- */
-export function generateFrontmatter(tokens) {
+export function generateFrontmatter(tokens: TokenFile): string {
   const constants = constantEntries(tokens.color);
   const light = themeEntries(tokens.color, "light");
   const dark = themeEntries(tokens.color, "dark");
@@ -606,12 +532,7 @@ export function generateFrontmatter(tokens) {
   return lines.join("\n");
 }
 
-/**
- * @param {string} markdown
- * @param {string} frontmatter
- * @returns {string}
- */
-export function replaceFrontmatter(markdown, frontmatter) {
+export function replaceFrontmatter(markdown: string, frontmatter: string): string {
   const next = markdown.replace(/^---\n[\s\S]*?\n---\n/, frontmatter);
   if (next === markdown && !markdown.startsWith(frontmatter)) {
     return `${frontmatter}${markdown}`;
@@ -619,15 +540,12 @@ export function replaceFrontmatter(markdown, frontmatter) {
   return next;
 }
 
-/**
- * @param {TokenFile} tokens
- * @returns {Record<string, string>}
- */
-export function generatedFiles(tokens) {
+export function generatedFiles(tokens: TokenFile): Record<string, string> {
   return {
     "tokens.css": generateTokensCss(tokens),
     "integrations/tailwind.css": generateTailwindCss(tokens),
     "integrations/nuxt-ui.css": generateNuxtUiCss(),
+    "integrations/shadcn-ui.css": generateShadcnUiCss(),
     "docs/tokens.md": generateTokensDoc(tokens),
     "skills/uni-helper-design/references/components.md": generateSkillComponents(),
     "skills/uni-helper-design/references/foundations.md": generateSkillFoundations(tokens),

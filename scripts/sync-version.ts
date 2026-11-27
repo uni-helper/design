@@ -1,7 +1,6 @@
 import fs from "node:fs";
 
-/** @type {unknown} */
-const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+const pkg: unknown = JSON.parse(fs.readFileSync("package.json", "utf8"));
 if (
   typeof pkg !== "object" ||
   pkg === null ||

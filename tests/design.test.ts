@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { expect, it } from "vite-plus/test";
-import { ROOT, loadTokens, generatedFiles, generateFrontmatter } from "../scripts/lib/tokens.mjs";
+import { ROOT, loadTokens, generatedFiles, generateFrontmatter } from "../scripts/lib/tokens.ts";
 
 const tokens = loadTokens();
 const errors: string[] = [];

@@ -4,14 +4,14 @@ The first release of the complete system. `tokens.json` is now the only source o
 
 - `tokens.json` and `tokens.schema.json` with semantic colour, type, spacing, radius, border, shadow, motion, layout, control, icon, and opacity tokens.
 - Generated `tokens.css` with light, dark, and `prefers-color-scheme` themes, `uh-type-*` classes, Chinese line-height overrides, `uh-nums`, and `uh-measure`.
-- Tailwind CSS v4 and Nuxt UI v4 bridges.
+- Tailwind CSS v4, Nuxt UI v4, and shadcn/ui Base UI bridges.
 - 30+ primitives: layout, buttons, links, badges, fields, inputs, selects, textareas, checkboxes, radios, switches, alerts, toasts, spinners, skeletons, empty states, tabs, breadcrumbs, pagination, sidebars, navigation items, TOCs, cards, tables, prose, code blocks, dialogs, separators, and the interactive hover button.
 - Optional `components/components.js` for theme persistence, tab keyboard navigation, native dialogs, toasts, and code copy.
 - `components/index.html` gallery in light and dark mode.
 - `docs/tokens.md`, `docs/components.md`, and `docs/integration.md`.
 - `assets/icons/uni-helper-icons.svg` with 24 symbols.
 - A self-contained Agent Skill with generated tokens, components, fonts, icons, and logos.
-- `scripts/build.mjs` and Vitest design tests, including generated-file parity, raw colour/font checks, and contrast audits.
+- `scripts/build.ts` and Vitest design tests, including generated-file parity, raw colour/font checks, and contrast audits.
 - `release-it` and `@release-it/conventional-changelog` for version bumps, local changelog updates, and tags.
 - Vite+ for format, lint, and type checks.
 - GitHub Actions checks on pushes to `main`, and a tag-triggered release workflow that publishes to npm and creates the GitHub release with `changelogithub`.

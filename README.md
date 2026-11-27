@@ -110,6 +110,17 @@ export default defineAppConfig({
 });
 ```
 
+### shadcn/ui (Base UI)
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@uni-helper/design/shadcn-ui.css";
+```
+
+Run `pnpm dlx shadcn@latest init -b base`, then delete the theme blocks that `init` writes. The bridge maps the sidebar colors and radius to the design tokens. See [docs/integration.md](docs/integration.md) for the Base UI dialog example.
+
 Read [docs/integration.md](docs/integration.md) for theme switching, migration from HSL variables, and the full mapping.
 
 ## Repository contents
@@ -142,7 +153,7 @@ pnpm fix     # apply formatting and safe lint fixes
 pnpm test    # Vitest design and component tests
 ```
 
-Development uses Vite+ and needs Node 22.18+, 24.11+, or 26+.
+The repository pins Node 26 in `.node-version`. The published package supports Node `^22.12` or `>=24`. Vite+ needs Node `^22.18`, `^24.11`, or `>=26`.
 
 Generated files keep the generator's format. `pnpm test` checks that they match it.
 
