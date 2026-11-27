@@ -1,7 +1,9 @@
 {
+  "$schema": "https://unpkg.com/release-it@21/schema/release-it.json",
   "git": {
     "push": true,
     "commitMessage": "chore: release v${version}",
+    "requireBranch": "main",
     "tagName": "v${version}"
   },
   "npm": {
