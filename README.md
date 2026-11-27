@@ -119,7 +119,7 @@ export default defineAppConfig({
 @import "@uni-helper/design/shadcn-ui.css";
 ```
 
-Run `pnpm dlx shadcn@latest init -b base`, then delete the theme blocks that `init` writes. The bridge maps the sidebar colors and radius to the design tokens. See [docs/integration.md](docs/integration.md) for the Base UI dialog example.
+Run `pnpm dlx shadcn@latest init -b base`, then delete the theme blocks and the generated Geist font import that `init` writes. The bridge maps the sidebar colors and radius to the design tokens. See [docs/integration.md](docs/integration.md) for the Base UI dialog example.
 
 Read [docs/integration.md](docs/integration.md) for theme switching, migration from HSL variables, and the full mapping.
 

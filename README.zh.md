@@ -119,7 +119,7 @@ export default defineAppConfig({
 @import "@uni-helper/design/shadcn-ui.css";
 ```
 
-运行 `pnpm dlx shadcn@latest init -b base`，然后删除 `init` 写入的主题块。桥接层会把侧边栏颜色和圆角映射到设计 token。Base UI 对话框示例见 [docs/integration.md](docs/integration.md)。
+运行 `pnpm dlx shadcn@latest init -b base`，然后删除 `init` 写入的主题块和 Geist 字体导入。桥接层会把侧边栏颜色和圆角映射到设计 token。Base UI 对话框示例见 [docs/integration.md](docs/integration.md)。
 
 主题切换、从 HSL 变量迁移以及完整映射见 [docs/integration.md](docs/integration.md)。
 

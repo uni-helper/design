@@ -31,6 +31,7 @@ The first release of the complete system. `tokens.json` is now the only source o
 
 - Input boundaries no longer rely on a decorative border.
 - Focus rings are consistent and survive forced-colors mode.
+- The shadcn/ui bridge sets `--radius` from `--radius-md`; the integration docs cover the generated Geist font import and the overlay class.
 - Chinese headings no longer receive Latin negative tracking.
 - Reduced motion stops skeleton and spinner loops, not only transitions.
 - The interactive hover button expands with `clip-path`, so long labels keep a complete fill.

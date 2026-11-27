@@ -183,7 +183,7 @@ Replace the theme that `init` writes to your global stylesheet with the design s
 @import "@uni-helper/design/shadcn-ui.css";
 ```
 
-Keep the `tw-animate-css` and `shadcn/tailwind.css` imports. The first provides the animation utilities; the second provides the data-state variants that Base UI components use. Delete the generated `@theme inline`, `:root`, and `.dark` blocks; the design tokens supply the colors and the `.dark` theme.
+Keep the `tw-animate-css` and `shadcn/tailwind.css` imports. The first provides the animation utilities; the second provides the data-state variants that Base UI components use. Delete the generated `@theme inline`, `:root`, and `.dark` blocks; the design tokens supply the colors and the `.dark` theme. Delete the generated `@fontsource-variable/geist` import too; `tokens.css` supplies Geist.
 
 The bridge maps:
 
@@ -200,7 +200,7 @@ The bridge maps:
 | `--sidebar-ring`                                                                                                                                                                        | `--ring`                   |
 | `--radius`                                                                                                                                                                              | `--radius-md`              |
 
-The shadcn components use the `.dark` class for dark mode. The token sheet supports that class. Set `.dark` from the theme provider or color-mode library; `data-theme="dark"` alone does not trigger the shadcn `dark:` variants. Do not copy the shadcn default palette into the app.
+The shadcn components use the `.dark` class for dark mode. The token sheet supports that class. Set `.dark` from the theme provider or color-mode library; `data-theme="dark"` alone does not trigger the shadcn `dark:` variants. Do not copy the shadcn default palette into the app. The shipped `DialogOverlay` uses `bg-black/50`. The design system's overlay token is available as `bg-overlay`; change the overlay class if you want the system backdrop.
 
 The components stay as shadcn ships them. Their semantic classes resolve to the design tokens. A Base UI dialog:
 

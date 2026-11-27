@@ -309,8 +309,11 @@ export function generateShadcnUiCss(): string {
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
+:root {
   --radius: var(--radius-md);
+}
+
+@theme inline {
   --color-sidebar: var(--muted);
   --color-sidebar-foreground: var(--foreground);
   --color-sidebar-primary: var(--primary);
