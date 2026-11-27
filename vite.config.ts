@@ -1,6 +1,7 @@
 import { defineConfig } from "vite-plus";
 
 const generated = [
+  "CHANGELOG.md",
   "DESIGN.md",
   "tokens.css",
   "docs/tokens.md",
