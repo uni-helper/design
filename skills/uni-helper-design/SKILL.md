@@ -5,7 +5,7 @@ license: MIT
 compatibility: Works with agents that can read local files and write HTML and CSS. No network access is required.
 metadata:
   author: uni-helper
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # uni-helper design system
